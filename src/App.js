@@ -162,6 +162,10 @@ function App() {
     setMessage('');
   };
 
+  const handleBackToList = () => {
+    setSelectedArticleId(null);
+  };
+
   if (loading) {
     return (
       <div className="blog-container">
@@ -209,6 +213,7 @@ function App() {
             onDelete={handleDeleteArticle}
             userId={userId}
             adminUid={"xpODpmRnWBZ2ELnvxHzYeq5BtKy2"}
+            onBack={handleBackToList}
           />
         )}
       </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ArticleDetail({ article, onDelete, userId, adminUid }) {
+function ArticleDetail({ article, onDelete, userId, adminUid, onBack }) {
     if (!article) {
         return null;
     }
@@ -18,6 +18,9 @@ function ArticleDetail({ article, onDelete, userId, adminUid }) {
                     Delete Article
                 </button>
             )}
+            <button onClick={onBack} className="back-button back-button-center" style={{ marginTop: '1.5rem' }}>
+                &larr; Back to All Articles
+            </button>
         </div>
     );
 }
