@@ -13,11 +13,9 @@ function ArticleDetail({ article, onDelete, userId, adminUid, onBack }) {
                     <p key={idx} className="article-paragraph">{paragraph}</p>
                 ))}
             </div>
-            {userId === adminUid && (
-                <button onClick={() => onDelete(article.id)} className="cancel-button" style={{ alignSelf: 'flex-end' }}>
-                    Delete Article
-                </button>
-            )}
+            <button onClick={() => onDelete(article.id)} className="cancel-button" style={{ alignSelf: 'flex-end' }}>
+                Delete Article
+            </button>
             <button onClick={onBack} className="back-button back-button-center">
                 &larr; Back to All Articles
             </button>
