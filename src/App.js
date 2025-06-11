@@ -82,7 +82,7 @@ function App() {
 
   useEffect(() => {
     if (db && userId) {
-      const articlesCollectionRef = collection(db, `artifacts/${userId}/public/data/articles`);
+      const articlesCollectionRef = collection(db, 'articles');
 
       const unsubscribe = onSnapshot(articlesCollectionRef, (snapshot) => {
         const fetchedArticles = snapshot.docs.map(doc => ({
