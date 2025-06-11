@@ -17,12 +17,6 @@ body {
   flex-direction: column; 
 }
 
-@media (min-width: 640px) {
-  .blog-container {
-    padding: 2rem;
-  }
-}
-
 .blog-card {
   background-color: #ffffff;
   border-radius: 0.75rem;
@@ -31,12 +25,6 @@ body {
   width: 100%;
   max-width: 64rem;
   border: 1px solid #e9d5ff;
-}
-
-@media (min-width: 640px) {
-  .blog-card {
-    padding: 2.5rem;
-  }
 }
 
 .blog-title {
@@ -50,13 +38,6 @@ body {
   text-align: center;
   color: #6366f1;
   margin-bottom: 2rem;
-}
-
-@media (min-width: 640px) {
-  .blog-title {
-    font-size: 3rem;
-    margin-bottom: 3rem;
-  }
 }
 
 .user-id-display {
@@ -134,7 +115,6 @@ body {
 .single-article-view {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
 }
 
 .back-button, .add-article-button, .submit-article-button, .cancel-button {
@@ -173,19 +153,13 @@ body {
 .article-title-detail {
   font-size: 1.875rem;
   font-weight: 800;
-  color: #1a202c;
+  color: #5b21b6;
   margin-bottom: 0.75rem;
-}
-
-@media (min-width: 640px) {
-  .article-title-detail {
-    font-size: 2.25rem;
-  }
 }
 
 .article-meta-detail {
   color: #4a5568;
-  font-size: 1rem;
+  font-size: .8rem;
   font-style: italic;
   margin-bottom: 1.5rem;
 }
@@ -252,4 +226,21 @@ body {
 }
 .form-buttons button {
     width: auto;
+}
+
+
+@media (min-width: 640px) {
+  .blog-container {
+    padding: 2rem;
+  }
+  .blog-card {
+    padding: 2.5rem;
+  }
+  .blog-title {
+    font-size: 3rem;
+    margin-bottom: 3rem;
+  }
+  .article-title-detail {
+    font-size: 2.25rem;
+  }
 }

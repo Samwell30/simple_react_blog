@@ -41,7 +41,7 @@ function ArticleList({
                     <ArticlePreview key={article.id} article={article} onClick={onArticleClick} />
                 ))
             ) : (
-                <p style={{ textAlign: 'center', color: '#666' }}>No articles yet. Add one above!</p>
+                <p className='blog-para'>No articles yet. Add one above!</p>
             )}
         </div>
     );

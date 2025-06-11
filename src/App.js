@@ -1,4 +1,3 @@
-/* global __app_id, __firebase_config, __initial_auth_token */
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Message from './components/Message';
@@ -11,7 +10,6 @@ import { getFirestore, collection, onSnapshot, addDoc, serverTimestamp, deleteDo
 
 function App() {
   const [db, setDb] = useState(null);
-  const [auth, setAuth] = useState(null);
   const [userId, setUserId] = useState(null);
   const [articles, setArticles] = useState([]);
   const [selectedArticleId, setSelectedArticleId] = useState(null);
@@ -31,28 +29,24 @@ function App() {
 
   useEffect(() => {
     try {
-      // MANDATORY: Use __app_id and __firebase_config global variables
-      const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-      const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-
+      // Use environment variables for config
+      const firebaseConfig = process.env.REACT_APP_FIREBASE_CONFIG ? JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG) : {};
       if (!firebaseConfig.apiKey) {
         console.error("Firebase config is missing API key. Please check __firebase_config.");
         setMessage("Error: Firebase configuration is incomplete. Cannot connect to database.");
         setLoading(false);
         return;
       }
-
       const app = initializeApp(firebaseConfig);
       const firestore = getFirestore(app);
       const authInstance = getAuth(app);
 
       setDb(firestore);
-      setAuth(authInstance);
 
       const signIn = async () => {
-        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+        if (process.env.REACT_APP_INITIAL_AUTH_TOKEN) {
           try {
-            await signInWithCustomToken(authInstance, __initial_auth_token);
+            await signInWithCustomToken(authInstance, process.env.REACT_APP_INITIAL_AUTH_TOKEN);
             console.log("Signed in with custom token.");
           } catch (error) {
             console.error("Error signing in with custom token:", error);
@@ -88,8 +82,7 @@ function App() {
 
   useEffect(() => {
     if (db && userId) {
-      const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-      const articlesCollectionRef = collection(db, `artifacts/${appId}/public/data/articles`);
+      const articlesCollectionRef = collection(db, `artifacts/${userId}/public/data/articles`);
 
       const unsubscribe = onSnapshot(articlesCollectionRef, (snapshot) => {
         const fetchedArticles = snapshot.docs.map(doc => ({
@@ -122,8 +115,7 @@ function App() {
       return;
     }
     try {
-      const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-      const articlesCollectionRef = collection(db, `artifacts/${appId}/public/data/articles`);
+      const articlesCollectionRef = collection(db, `artifacts/${userId}/public/data/articles`);
       await addDoc(articlesCollectionRef, {
         title: newArticleTitle,
         author: newArticleAuthor,
@@ -145,8 +137,7 @@ function App() {
   const handleDeleteArticle = async (articleId) => {
     if (!db || !articleId) return;
     try {
-      const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-      const articleDocRef = doc(db, `artifacts/${appId}/public/data/articles/${articleId}`);
+      const articleDocRef = doc(db, `artifacts/${userId}/public/data/articles/${articleId}`);
       await deleteDoc(articleDocRef);
       setMessage('Article deleted successfully!');
       setSelectedArticleId(null);
@@ -178,7 +169,7 @@ function App() {
     <div className="blog-container">
       <Message message={message} />
       <div className="blog-card">
-        <h1 className="blog-title">My Simple Blog</h1>
+        <h1 className="blog-title">Simple React Blog</h1>
         <p className='blog-para'> Hello. This is a shared blog app created with React and Firebase. Feel free to add an article!</p>
         {userId && <p className="user-id-display">Your User ID: {userId}</p>}
         {selectedArticleId === null ? (
