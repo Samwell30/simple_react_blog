@@ -115,7 +115,7 @@ function App() {
       return;
     }
     try {
-      const articlesCollectionRef = collection(db, `artifacts/${userId}/public/data/articles`);
+      const articlesCollectionRef = collection(db, 'articles');
       await addDoc(articlesCollectionRef, {
         title: newArticleTitle,
         author: newArticleAuthor,
@@ -137,7 +137,7 @@ function App() {
   const handleDeleteArticle = async (articleId) => {
     if (!db || !articleId) return;
     try {
-      const articleDocRef = doc(db, `artifacts/${userId}/public/data/articles/${articleId}`);
+      const articleDocRef = doc(db, 'articles', articleId);
       await deleteDoc(articleDocRef);
       setMessage('Article deleted successfully!');
       setSelectedArticleId(null);
