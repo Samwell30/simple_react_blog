@@ -170,7 +170,7 @@ function App() {
       <Message message={message} />
       <div className="blog-card">
         <h1 className="blog-title">Simple React Blog</h1>
-        <p className='blog-para'> Hello. This is a shared blog app created with React and Firebase. Feel free to add an article!</p>
+        <p className='blog-para'> Hello. This is a shared blog app created with React and Firebase. Feel free say what's on your mind!</p>
         {userId && <p className="user-id-display">Your User ID: {userId}</p>}
         {selectedArticleId === null ? (
           <>
