@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
 
+/* Add this at the top for global box-sizing */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 body {
   margin: 0;
   font-family: 'Inter', sans-serif; 
@@ -242,5 +250,52 @@ body {
   }
   .article-title-detail {
     font-size: 2.25rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .blog-container {
+    padding: 0.5rem;
+    min-width: 0;
+    width: 100%;
+    overflow-x: hidden;
+  }
+  .blog-card {
+    padding: 1rem;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+  }
+  .blog-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .section-title {
+    font-size: 1.25rem;
+  }
+  .article-title-detail {
+    font-size: 1.25rem;
+  }
+  .add-article-form, .article-list, .single-article-view {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+  }
+  .form-input, .form-textarea {
+    font-size: 0.95rem;
+  }
+  .form-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: stretch;
+  }
+  .form-buttons button {
+    width: 100%;
+  }
+  .article-preview {
+    padding: 1rem;
+    font-size: 0.95rem;
   }
 }
